@@ -16,10 +16,10 @@
         max-width: 900px;
       }
       alijaya-masonry {
-        border: 1px solid red;
+        border: 5px solid red;
       }
       alijaya-masonry-item {
-        border: 1px solid black;
+        border: 5px solid black;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -29,20 +29,79 @@
   <body>
 
     <div class="vertical-section-container centered">
-      <h3>Basic alijaya-masonry Demo</h3>
+      <h3>cell-width only</h3>
       <demo-snippet>
         <template>
-          <alijaya-masonry cols="4" cell-width="100" cell-height="100" gutter="10">
+          <alijaya-masonry cell-width="100" cell-height="100" gutter="10">
             <alijaya-masonry-item col="2">1</alijaya-masonry-item>
             <alijaya-masonry-item>2</alijaya-masonry-item>
             <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
             <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
             <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
             <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+            <alijaya-masonry-item row="3">6</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">7</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
           </alijaya-masonry>
         </template>
       </demo-snippet>
     </div>
 
+    <div class="vertical-section-container centered">
+      <h3>cols only</h3>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cols="5" cell-height="100" gutter="10">
+            <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+            <alijaya-masonry-item>2</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+            <alijaya-masonry-item row="3">6</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">7</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>cols and cell-width</h3>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cols="5" cell-width="100" cell-height="100" gutter="10">
+            <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+            <alijaya-masonry-item>2</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+            <alijaya-masonry-item row="3">6</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">7</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>cols and cell-ratio</h3>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cols="5" cell-ratio="1" gutter="10">
+            <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+            <alijaya-masonry-item>2</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+            <alijaya-masonry-item row="3">6</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">7</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
   </body>
 </html>
