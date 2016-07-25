@@ -3,7 +3,8 @@
   "description": "masonry layout in polymer, inspired by desandro/masonry",
   "main": "alijaya-masonry.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0"
+    "polymer": "Polymer/polymer#^1.4.0",
+    "css-element-queries": "^0.3.2"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
