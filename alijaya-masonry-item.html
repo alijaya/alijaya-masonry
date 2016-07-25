@@ -34,6 +34,14 @@ masonry item
           value: 1,
         },
       },
+
+      observers: [
+        '_propChange(col, row)'
+      ],
+
+      _propChange: function() {
+        this.fire('alijaya-masonry-item-change');
+      },
     });
   </script>
 </dom-module>

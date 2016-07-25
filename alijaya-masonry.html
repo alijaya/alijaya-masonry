@@ -20,14 +20,13 @@ masonry layout in polymer, inspired by desandro/masonry
 
       #sizer {
         display: block;
-        position: static;
+        position: relative;
         box-sizing: border-box;
-        visibility: hidden;
-        z-index: -1;
       }
     </style>
-    <div id="sizer"></div>
-    <content id="content" select="alijaya-masonry-item"></content>
+    <div id="sizer">
+      <content id="content" select="alijaya-masonry-item"></content>
+    </div>
   </template>
 
   <script>
@@ -66,6 +65,10 @@ masonry layout in polymer, inspired by desandro/masonry
         '_propChange(cols, rows, cellWidth, cellHeight, cellRatio, gutter)'
       ],
 
+      listeners: {
+        'alijaya-masonry-item-change': '_childChange',
+      },
+
       attached: function() {
         this._nodeObserver = Polymer.dom(this).observeNodes(function(info) {
           this.layout();
@@ -73,6 +76,7 @@ masonry layout in polymer, inspired by desandro/masonry
         this._resizeSensor = new ResizeSensor(this, function(el) {
           this.layout();
         }.bind(this));
+        console.log(this._resizeSensor);
       },
 
       detached: function() {
@@ -116,6 +120,10 @@ masonry layout in polymer, inspired by desandro/masonry
       },
 
       _propChange: function() {
+        this.layout();
+      },
+
+      _childChange: function() {
         this.layout();
       },
 

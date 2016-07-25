@@ -8,6 +8,8 @@
 
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../paper-styles/color.html">
+    <link rel="import" href="../../paper-styles/shadow.html">
 
     <link rel="import" href="demo-masonry.html">
     <link rel="import" href="../alijaya-masonry.html">
@@ -17,13 +19,19 @@
         max-width: 900px;
       }
       alijaya-masonry {
-        border: 5px solid red;
+        outline: var(--paper-blue-700) solid 5px;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
       }
       alijaya-masonry-item {
-        border: 5px solid black;
+        @apply(--shadow-elevation-2dp);
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: all 200ms ease;
       }
     </style>
   </head>
@@ -33,7 +41,12 @@
       <h3>Demo with Settings</h3>
       <demo-snippet>
         <template>
-          <demo-masonry cell-width="100" cell-height="100" gutter="10"></demo-masonry>
+          <demo-masonry cell-width="100" cell-height="100" gutter="10"
+                        items='[{"col":1, "row":2}, {"col":2, "row":1},
+                                {"col":1, "row":1}, {"col":2, "row":2},
+                                {"col":3, "row":2}, {"col":2, "row":2},
+                                {"col":1, "row":1}, {"col":2, "row":1},
+                                {"col":2, "row":1}, {"col":1, "row":2}]'></demo-masonry>
         </template>
       </demo-snippet>
     </div>

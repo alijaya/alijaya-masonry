@@ -1,7 +1,8 @@
 <link rel="import" href="../../paper-slider/paper-slider.html">
 <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../paper-menu-button/paper-menu-button.html">
-<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+<link rel="import" href="../../paper-styles/color.html">
+<link rel="import" href="../../paper-styles/shadow.html">
 <link rel="import" href="../alijaya-masonry.html">
 
 <dom-module id="demo-masonry">
@@ -9,17 +10,33 @@
     <style include="demo-pages-shared-styles"></style>
     <style>
       :host {
-        display: block;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
         position: relative;
       }
       alijaya-masonry {
-        border: 5px solid red;
+        outline: var(--paper-blue-700) solid 5px;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
       }
       alijaya-masonry-item {
-        border: 5px solid black;
+        @apply(--shadow-elevation-2dp);
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: all 200ms ease;
+      }
+      alijaya-masonry-item div {
+        max-width: 100%;
+        max-height: 100%;
+      }
+      alijaya-masonry-item paper-slider {
+        max-width: 100%;
       }
       #menu {
         position: absolute;
@@ -32,21 +49,24 @@
     </style>
     <alijaya-masonry  cols="[[cols]]" rows="[[rows]]"
                       cell-width="[[cellWidth]]" cell-height="[[cellHeight]]"
-                      cell-ratio="[[cellRatio]]" gutter="[[gutter]]">
-      <alijaya-masonry-item></alijaya-masonry-item>
-      <alijaya-masonry-item></alijaya-masonry-item>
-      <alijaya-masonry-item></alijaya-masonry-item>
-      <alijaya-masonry-item></alijaya-masonry-item>
-      <alijaya-masonry-item></alijaya-masonry-item>
-      <alijaya-masonry-item></alijaya-masonry-item>
-      <alijaya-masonry-item></alijaya-masonry-item>
-      <alijaya-masonry-item></alijaya-masonry-item>
-      <alijaya-masonry-item></alijaya-masonry-item>
-      <alijaya-masonry-item></alijaya-masonry-item>
+                      cell-ratio="[[cellRatio]]" gutter="[[gutter]]"
+                      style="width:[[width]]%; height:[[height]]%;">
+      <template is="dom-repeat" items="{{items}}">
+        <alijaya-masonry-item col="[[item.col]]" row="[[item.row]]">
+          <div>
+            <paper-slider pin min="1" max="4" value="{{item.col}}"></paper-slider>
+            <paper-slider pin min="1" max="4" value="{{item.row}}"></paper-slider>
+          </div>
+        </alijaya-masonry-item>
+      </template>
     </alijaya-masonry>
     <paper-menu-button id="menu" horizontal-offset="56">
-      <paper-icon-button icon="menu" class="dropdown-trigger">Click</paper-icon-button>
+      <paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
       <div id="controls" class="dropdown-content">
+        <h4>width</h4>
+        <paper-slider editable immediate-value="{{width}}" value="[[width]]" min="50" max="100"></paper-slider>
+        <h4>height</h4>
+        <paper-slider editable immediate-value="{{height}}" value="[[height]]" min="50" max="100"></paper-slider>
         <h4>cols</h4>
         <paper-slider editable immediate-value="{{cols}}" value="[[cols]]" max="10"></paper-slider>
         <h4>rows</h4>
@@ -66,6 +86,14 @@
     Polymer({
       is: 'demo-masonry',
       properties: {
+        width: {
+          type: Number,
+          value: 100,
+        },
+        height: {
+          type: Number,
+          value: 100,
+        },
         cols: {
           type: Number,
           value: null,
@@ -89,6 +117,12 @@
         gutter: {
           type: Number,
           value: 0,
+        },
+        items: {
+          type: Array,
+          value: function() {
+            return [];
+          },
         },
       },
     });
