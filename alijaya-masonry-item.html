@@ -1,0 +1,39 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`alijaya-masonry-item`
+masonry item
+
+@demo demo/index.html
+-->
+
+<dom-module id="alijaya-masonry-item">
+  <template strip-whitespace>
+    <style>
+      :host {
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+      }
+    </style>
+    <content></content>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'alijaya-masonry-item',
+
+      properties: {
+        col: {
+          type: Number,
+          value: 1,
+        },
+        row: {
+          type: Number,
+          value: 1,
+        },
+      },
+    });
+  </script>
+</dom-module>

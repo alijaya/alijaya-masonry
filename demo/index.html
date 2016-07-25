@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <title>alijaya-masonry demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+
+    <link rel="import" href="../alijaya-masonry.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+      .centered {
+        max-width: 900px;
+      }
+      alijaya-masonry {
+        border: 1px solid red;
+      }
+      alijaya-masonry-item {
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="vertical-section-container centered">
+      <h3>Basic alijaya-masonry Demo</h3>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cols="4" cell-width="100" cell-height="100" gutter="10">
+            <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+            <alijaya-masonry-item>2</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+  </body>
+</html>
