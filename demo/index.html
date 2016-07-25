@@ -9,6 +9,7 @@
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
 
+    <link rel="import" href="demo-masonry.html">
     <link rel="import" href="../alijaya-masonry.html">
 
     <style is="custom-style" include="demo-pages-shared-styles">
@@ -27,6 +28,15 @@
     </style>
   </head>
   <body>
+
+    <div class="vertical-section-container centered">
+      <h3>Demo with Settings</h3>
+      <demo-snippet>
+        <template>
+          <demo-masonry cell-width="100" cell-height="100" gutter="10"></demo-masonry>
+        </template>
+      </demo-snippet>
+    </div>
 
     <div class="vertical-section-container centered">
       <h3>cell-width only</h3>

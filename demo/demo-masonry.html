@@ -1,0 +1,96 @@
+<link rel="import" href="../../paper-slider/paper-slider.html">
+<link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+<link rel="import" href="../alijaya-masonry.html">
+
+<dom-module id="demo-masonry">
+  <template>
+    <style include="demo-pages-shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+      }
+      alijaya-masonry {
+        border: 5px solid red;
+      }
+      alijaya-masonry-item {
+        border: 5px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #menu {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      #controls {
+        padding: 20px;
+      }
+    </style>
+    <alijaya-masonry  cols="[[cols]]" rows="[[rows]]"
+                      cell-width="[[cellWidth]]" cell-height="[[cellHeight]]"
+                      cell-ratio="[[cellRatio]]" gutter="[[gutter]]">
+      <alijaya-masonry-item></alijaya-masonry-item>
+      <alijaya-masonry-item></alijaya-masonry-item>
+      <alijaya-masonry-item></alijaya-masonry-item>
+      <alijaya-masonry-item></alijaya-masonry-item>
+      <alijaya-masonry-item></alijaya-masonry-item>
+      <alijaya-masonry-item></alijaya-masonry-item>
+      <alijaya-masonry-item></alijaya-masonry-item>
+      <alijaya-masonry-item></alijaya-masonry-item>
+      <alijaya-masonry-item></alijaya-masonry-item>
+      <alijaya-masonry-item></alijaya-masonry-item>
+    </alijaya-masonry>
+    <paper-menu-button id="menu" horizontal-offset="56">
+      <paper-icon-button icon="menu" class="dropdown-trigger">Click</paper-icon-button>
+      <div id="controls" class="dropdown-content">
+        <h4>cols</h4>
+        <paper-slider editable immediate-value="{{cols}}" value="[[cols]]" max="10"></paper-slider>
+        <h4>rows</h4>
+        <paper-slider editable immediate-value="{{rows}}" value="[[rows]]" max="10"></paper-slider>
+        <h4>cell-width</h4>
+        <paper-slider editable immediate-value="{{cellWidth}}" value="[[cellWidth]]" max="300"></paper-slider>
+        <h4>cell-height</h4>
+        <paper-slider editable immediate-value="{{cellHeight}}" value="[[cellHeight]]" max="300"></paper-slider>
+        <h4>cell-ratio</h4>
+        <paper-slider editable step="0.01" immediate-value="{{cellRatio}}" value="[[cellRatio]]" max="3"></paper-slider>
+        <h4>gutter</h4>
+        <paper-slider editable immediate-value="{{gutter}}" value="[[gutter]]" max="100"></paper-slider>
+      </div>
+    </paper-menu-button>
+  </template>
+  <script>
+    Polymer({
+      is: 'demo-masonry',
+      properties: {
+        cols: {
+          type: Number,
+          value: null,
+        },
+        rows: {
+          type: Number,
+          value: null,
+        },
+        cellWidth: {
+          type: Number,
+          value: null,
+        },
+        cellHeight: {
+          type: Number,
+          value: null,
+        },
+        cellRatio: {
+          type: Number,
+          value: null,
+        },
+        gutter: {
+          type: Number,
+          value: 0,
+        },
+      },
+    });
+  </script>
+</dom-module>
