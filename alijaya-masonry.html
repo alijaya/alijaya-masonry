@@ -15,7 +15,6 @@ masonry layout in polymer, inspired by desandro/masonry
         display: block;
         position: relative;
         box-sizing: border-box;
-        width: 100%;
       }
 
       #sizer {
@@ -57,7 +56,7 @@ masonry layout in polymer, inspired by desandro/masonry
         },
         gutter: {
           type: Number,
-          value: null,
+          value: 0,
         },
       },
 
@@ -65,10 +64,14 @@ masonry layout in polymer, inspired by desandro/masonry
         '_propChange(cols, rows, cellWidth, cellHeight, cellRatio, gutter)'
       ],
 
-      ready: function() {
-        Polymer.dom(this.$.content).observeNodes(function(info) {
+      attached: function() {
+        this._nodeObserver = Polymer.dom(this).observeNodes(function(info) {
           this.layout();
-        }.bind(this));
+        });
+      },
+
+      detached: function() {
+        Polymer.dom(this).unobserveNodes(this._nodeObserver);
       },
 
       _layout: function(items, cols, rows, cellWidth, cellHeight, gutter) {
@@ -108,10 +111,42 @@ masonry layout in polymer, inspired by desandro/masonry
       },
 
       layout: function() {
+        var width = this.clientWidth;
+        var height = this.clientHeight;
+        var cols = this.cols;
+        var rows = this.rows;
+        var cellWidth = this.cellWidth;
+        var cellHeight = this.cellHeight;
+        var cellRatio = this.cellRatio;
+        var gutter = this.gutter;
+
+        if(!cellWidth && cellHeight && cellRatio) { // derive cellWidth
+          cellWidth = cellHeight * cellRatio;
+        }
+
+        if(cols) {
+          if(cellWidth) {
+            // good to go
+          } else {
+            cellWidth = (width + gutter) / cols - gutter;
+          }
+        } else {
+          if(cellWidth) {
+            cols = Math.floor((width + gutter) / (cellWidth + gutter));
+          } else {
+            // bad to go
+            return;
+          }
+        }
+
+        if(!cellHeight && cellWidth && cellRatio) { // derive cellHeight
+          cellHeight = cellWidth / cellRatio;
+        }
+
         this._layout( this.getEffectiveChildren(),
-                      this.cols, this.rows,
-                      this.cellWidth, this.cellHeight,
-                      this.gutter);
+                      cols, rows,
+                      cellWidth, cellHeight,
+                      gutter);
       },
 
     });
