@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<script src="../css-element-queries/src/ResizeSensor.js"></script>
 <link rel="import" href="alijaya-masonry-item.html">
 
 <!--
@@ -68,11 +69,17 @@ masonry layout in polymer, inspired by desandro/masonry
       attached: function() {
         this._nodeObserver = Polymer.dom(this).observeNodes(function(info) {
           this.layout();
-        });
+        }.bind(this));
+        this._resizeSensor = new ResizeSensor(this, function(el) {
+          this.layout();
+        }.bind(this));
       },
 
       detached: function() {
         Polymer.dom(this).unobserveNodes(this._nodeObserver);
+        delete this._nodeObserver;
+        this._resizeSensor.detach();
+        delete this._resizeSensor;
       },
 
       _layout: function(items, cols, rows, cellWidth, cellHeight, gutter) {
@@ -84,6 +91,7 @@ masonry layout in polymer, inspired by desandro/masonry
           var col = el.col;
           var row = el.row;
           if(!col || !row) return;
+          if(col > cols) col = cols; // truncate the col
 
           for(var i=0; i<cols-col+1; i++) {
             var curY = Math.max.apply(null, groupCol.slice(i, i+col));
@@ -102,7 +110,7 @@ masonry layout in polymer, inspired by desandro/masonry
           el.style.height = ((cellHeight + gutter) * row - gutter) + 'px';
         });
 
-        rows = rows | Math.max.apply(null, groupCol);
+        rows = rows ? rows : Math.max.apply(null, groupCol);
         this.$.sizer.style.width = ((cellWidth + gutter) * cols - gutter) + 'px';
         this.$.sizer.style.height = ((cellHeight + gutter) * rows - gutter) + 'px';
       },
@@ -133,7 +141,7 @@ masonry layout in polymer, inspired by desandro/masonry
           }
         } else {
           if(cellWidth) {
-            cols = Math.floor((width + gutter) / (cellWidth + gutter));
+            cols = Math.max(1, Math.floor((width + gutter) / (cellWidth + gutter)));
           } else {
             // bad to go
             return;
