@@ -68,7 +68,7 @@ If `rows` is missing, the component will take the full height.
 
 If `rows` is set, then the component will take the `cell-height` * `rows`.
 
-## `col` and `row` in `alijaya-masonry-item`
+## col and row in alijaya-masonry-item
 
 Default to 1. Define how much column and row that item takes.
 
