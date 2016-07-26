@@ -22,8 +22,23 @@ masonry layout in polymer, inspired by desandro/masonry
         display: block;
         position: relative;
         box-sizing: border-box;
+        @apply(--alijaya-masonry-sizer);
+      }
+
+      #sensor {
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        visibility: hidden;
+        overflow: hidden;
+        z-index: -1;
       }
     </style>
+    <div id="sensor"></div>
     <div id="sizer">
       <content id="content" select="alijaya-masonry-item"></content>
     </div>
@@ -73,10 +88,9 @@ masonry layout in polymer, inspired by desandro/masonry
         this._nodeObserver = Polymer.dom(this).observeNodes(function(info) {
           this.layout();
         }.bind(this));
-        this._resizeSensor = new ResizeSensor(this, function(el) {
+        this._resizeSensor = new ResizeSensor(this.$.sensor, function(el) {
           this.layout();
         }.bind(this));
-        console.log(this._resizeSensor);
       },
 
       detached: function() {
