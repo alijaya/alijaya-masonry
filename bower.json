@@ -1,6 +1,25 @@
 {
   "name": "alijaya-masonry",
+  "version": "0.1.1",
   "description": "masonry layout in polymer, inspired by desandro/masonry",
+  "homepage": "http://alijaya.github.io/alijaya-masonry/components/alijaya-masonry/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alijaya/alijaya-masonry.git"
+  },
+  "authors": [
+    "alijaya <alijayameilio@gmail.com>"
+  ],
+  "keywords": [
+    "masonry",
+    "web-components",
+    "layout",
+    "polymer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "bower_components"
+  ],
   "main": "alijaya-masonry.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
