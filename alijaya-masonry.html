@@ -182,23 +182,23 @@ Custom property | Description | Default
             }
           }
 
-          el.style.left = ((cellWidth + gutter) * x) + 'px';
-          el.style.width = ((cellWidth + gutter) * col - gutter) + 'px';
+          el.style.left = Math.round((cellWidth + gutter) * x) + 'px';
+          el.style.width = Math.round((cellWidth + gutter) * col - gutter) + 'px';
           if(cellHeight) {
-            el.style.top = ((cellHeight + gutter) * y) + 'px';
-            el.style.height = ((cellHeight + gutter) * row - gutter) + 'px';
+            el.style.top = Math.round((cellHeight + gutter) * y) + 'px';
+            el.style.height = Math.round((cellHeight + gutter) * row - gutter) + 'px';
           } else {
-            el.style.top = y + 'px';
+            el.style.top = Math.round(y) + 'px';
             el.style.height = null;
           }
         });
 
-        this.$.sizer.style.width = ((cellWidth + gutter) * cols - gutter) + 'px';
+        this.$.sizer.style.width = Math.round((cellWidth + gutter) * cols - gutter) + 'px';
         if(cellHeight) {
           rows = rows ? rows : Math.max.apply(null, groupCol);
-          this.$.sizer.style.height = ((cellHeight + gutter) * rows - gutter) + 'px';
+          this.$.sizer.style.height = Math.round((cellHeight + gutter) * rows - gutter) + 'px';
         } else {
-          this.$.sizer.style.height = (Math.max.apply(null, groupCol) - gutter) + 'px';
+          this.$.sizer.style.height = Math.round(Math.max.apply(null, groupCol) - gutter) + 'px';
         }
       },
 
