@@ -8,6 +8,30 @@ masonry layout in polymer, inspired by desandro/masonry
 [*Github Repo*](https://github.com/alijaya/alijaya-masonry)
 See demo for example.
 
+## Example
+
+``` html
+<alijaya-masonry cols="4" cell-ratio="1" gutter="10">
+  <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+  <alijaya-masonry-item>2</alijaya-masonry-item>
+  <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+  <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+  <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+  <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+  <alijaya-masonry-item row="3">7</alijaya-masonry-item>
+  <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+  <alijaya-masonry-item col="2" row="2">9</alijaya-masonry-item>
+</alijaya-masonry>
+```
+
+## Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--alijaya-masonry-sizer` | Mixin applied to inner bounding-box | `{}`
+
 @demo demo/index.html
 -->
 
@@ -52,26 +76,52 @@ See demo for example.
       is: 'alijaya-masonry',
 
       properties: {
+        /**
+         * Number of columns.
+         * Can be derived from `cellWidth`
+         */
         cols: {
           type: Number,
           value: null,
         },
+        /**
+         * Number of rows.
+         * Used for determine the fixed height of component.
+         */
         rows: {
           type: Number,
           value: null,
         },
+        /**
+         * The individual cell width.
+         * Can be derived from `cellHeight` and `cellRatio`.
+         * Or can be derived from `cols`.
+         */
         cellWidth: {
           type: Number,
           value: null,
         },
+        /**
+         * The individual cell height.
+         * Can be derived from `cellWidth` and `cellRatio`.
+         * If can't be derived, the cell height takes flexible form.
+         */
         cellHeight: {
           type: Number,
           value: null,
         },
+        /**
+         * The individual cell ratio.
+         * Used for determine the `cellWidth` or `cellHeight`.
+         * If `cellWidth` and `cellHeight` are set, this will be ignored.
+         */
         cellRatio: {
           type: Number,
           value: null,
         },
+        /**
+         * The spacing between items.
+         */
         gutter: {
           type: Number,
           value: 0,
@@ -157,6 +207,11 @@ See demo for example.
         this.layout();
       },
 
+      /**
+       * Run the layout algorithm if something change.
+       *
+       * @method layout
+       */
       layout: function() {
         var width = this.clientWidth;
         var height = this.clientHeight;

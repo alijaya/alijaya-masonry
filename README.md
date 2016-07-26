@@ -22,6 +22,14 @@ masonry layout in polymer, inspired by desandro/masonry
 </alijaya-masonry>
 ```
 
+## Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--alijaya-masonry-sizer` | Mixin applied to inner bounding-box | `{}`
+
 ## `gutter`
 
 Define the spacing between the items.
