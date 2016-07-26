@@ -4,7 +4,7 @@ masonry layout in polymer, inspired by desandro/masonry
 
 ## Demo and API Docs
 
-[*Demo and API Docs*](http://alijaya.github.io/iron-accordions/components/alijaya-masonry/)
+[*Demo and API Docs*](http://alijaya.github.io/alijaya-masonry/components/alijaya-masonry/)
 
 ## Example
 
@@ -30,11 +30,11 @@ Custom property | Description | Default
 ----------------|-------------|----------
 `--alijaya-masonry-sizer` | Mixin applied to inner bounding-box | `{}`
 
-## `gutter`
+## gutter
 
 Define the spacing between the items.
 
-## `cell-width`, `cell-height`, and `cell-ratio`
+## cell-width, cell-height, and cell-ratio
 
 One of this value can be derived from the other value.
 
@@ -47,7 +47,7 @@ If `cell-width` and `cell-height` are missing, it will find `cell-width` using `
 
 If `cell-width`, `cell-height`, and `cell-ratio` are set, then `cell-ratio` is ignored.
 
-## `alijaya-masonry` width, `cols` and `cell-width`
+## alijaya-masonry width, cols and cell-width
 
 If `cols` is missing, it can be derived from `alijaya-masonry` width / `cell-width`.
 
@@ -56,7 +56,7 @@ If `cell-width` is missing, it can be derived from `alijaya-masonry` width / `co
 If `cols` and `cell-width` are set, `alijaya-masonry` width could be the
 `cols` * `cell-width` if the `display` style of `alijaya-masonry` is set to `inline`.
 
-## `rows`
+## rows
 
 If `rows` is missing, the component will take the full height.
 
@@ -66,11 +66,11 @@ If `rows` is set, then the component will take the `cell-height` * `rows`.
 
 Default to 1. Define how much column and row that item takes.
 
-## Item `col` is bigger than `cols`
+## Item col is bigger than cols
 
 The item `col` will be truncated.
 
-## Can't derive `cell-height`
+## Can't derive cell-height
 
 If after all of the effort, we can't still derive the `cell-height`, then the
 item will take its original height, `row` will be ignored.
