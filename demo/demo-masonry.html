@@ -23,6 +23,10 @@
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        --alijaya-masonry-sizer: {
+          outline: var(--paper-blue-900) solid 1px;
+          overflow: hidden;
+        };
       }
       alijaya-masonry-item {
         @apply(--shadow-elevation-2dp);
@@ -50,7 +54,7 @@
     <alijaya-masonry  cols="[[cols]]" rows="[[rows]]"
                       cell-width="[[cellWidth]]" cell-height="[[cellHeight]]"
                       cell-ratio="[[cellRatio]]" gutter="[[gutter]]"
-                      style="width:[[width]]%; height:[[height]]%;">
+                      style$="width:[[width]]%; height:[[height]]%;">
       <template is="dom-repeat" items="{{items}}">
         <alijaya-masonry-item col="[[item.col]]" row="[[item.row]]">
           <div>
