@@ -110,6 +110,7 @@ masonry layout in polymer, inspired by desandro/masonry
           var row = el.row;
           if(!col || !row) return;
           if(col > cols) col = cols; // truncate the col
+          if(!cellHeight) el.style.height = null;
 
           for(var i=0; i<cols-col+1; i++) {
             var curY = Math.max.apply(null, groupCol.slice(i, i+col));
@@ -119,18 +120,31 @@ masonry layout in polymer, inspired by desandro/masonry
             }
           }
           for(var i=x; i<x+col; i++) {
-            groupCol[i] = y + row;
+            if(cellHeight) {
+              groupCol[i] = y + row;
+            } else {
+              groupCol[i] = y + el.offsetHeight + gutter;
+            }
           }
 
           el.style.left = ((cellWidth + gutter) * x) + 'px';
           el.style.width = ((cellWidth + gutter) * col - gutter) + 'px';
-          el.style.top = ((cellHeight + gutter) * y) + 'px';
-          el.style.height = ((cellHeight + gutter) * row - gutter) + 'px';
+          if(cellHeight) {
+            el.style.top = ((cellHeight + gutter) * y) + 'px';
+            el.style.height = ((cellHeight + gutter) * row - gutter) + 'px';
+          } else {
+            el.style.top = y + 'px';
+            el.style.height = null;
+          }
         });
 
-        rows = rows ? rows : Math.max.apply(null, groupCol);
         this.$.sizer.style.width = ((cellWidth + gutter) * cols - gutter) + 'px';
-        this.$.sizer.style.height = ((cellHeight + gutter) * rows - gutter) + 'px';
+        if(cellHeight) {
+          rows = rows ? rows : Math.max.apply(null, groupCol);
+          this.$.sizer.style.height = ((cellHeight + gutter) * rows - gutter) + 'px';
+        } else {
+          this.$.sizer.style.height = (Math.max.apply(null, groupCol) - gutter) + 'px';
+        }
       },
 
       _propChange: function() {
