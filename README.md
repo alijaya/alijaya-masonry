@@ -2,37 +2,69 @@
 
 masonry layout in polymer, inspired by desandro/masonry
 
-## Install the Polymer-CLI
+## Demo and API Docs
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
+[*Demo and API Docs*](http://alijaya.github.io/iron-accordions/components/alijaya-masonry/)
 
-## Viewing Your Application
+## Example
 
-```
-$ polymer serve
-```
-
-## Building Your Application
-
-```
-$ polymer build
-```
-
-This will create a `build/` folder with `bundled/` and `unbundled/` sub-folders
-containing a bundled (Vulcanized) and unbundled builds, both run through HTML,
-CSS, and JS optimizers.
-
-You can serve the built versions by giving `polymer serve` a folder to serve
-from:
-
-```
-$ polymer serve build/bundled
+``` html
+<alijaya-masonry cols="4" cell-ratio="1" gutter="10">
+  <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+  <alijaya-masonry-item>2</alijaya-masonry-item>
+  <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+  <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+  <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+  <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+  <alijaya-masonry-item row="3">7</alijaya-masonry-item>
+  <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+  <alijaya-masonry-item col="2" row="2">9</alijaya-masonry-item>
+</alijaya-masonry>
 ```
 
-## Running Tests
+## `gutter`
 
-```
-$ polymer test
-```
+Define the spacing between the items.
 
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+## `cell-width`, `cell-height`, and `cell-ratio`
+
+One of this value can be derived from the other value.
+
+If `cell-width` is missing, it can be derived from `cell-height` * `cell-ratio`.
+
+If `cell-height` is missing, it can be derived from `cell-width` / `cell-ratio`.
+
+If `cell-width` and `cell-height` are missing, it will find `cell-width` using `cols`
+(See Next Section), and derive `cell-height` using the same way.
+
+If `cell-width`, `cell-height`, and `cell-ratio` are set, then `cell-ratio` is ignored.
+
+## `alijaya-masonry` width, `cols` and `cell-width`
+
+If `cols` is missing, it can be derived from `alijaya-masonry` width / `cell-width`.
+
+If `cell-width` is missing, it can be derived from `alijaya-masonry` width / `cols`.
+
+If `cols` and `cell-width` are set, `alijaya-masonry` width could be the
+`cols` * `cell-width` if the `display` style of `alijaya-masonry` is set to `inline`.
+
+## `rows`
+
+If `rows` is missing, the component will take the full height.
+
+If `rows` is set, then the component will take the `cell-height` * `rows`.
+
+## `col` and `row` in `alijaya-masonry-item`
+
+Default to 1. Define how much column and row that item takes.
+
+## Item `col` is bigger than `cols`
+
+The item `col` will be truncated.
+
+## Can't derive `cell-height`
+
+If after all of the effort, we can't still derive the `cell-height`, then the
+item will take its original height, `row` will be ignored.
+
+And the component will take the full height, `rows` will be ignored too.
