@@ -6,6 +6,12 @@ masonry layout in polymer, inspired by desandro/masonry
 
 [*Demo and API Docs*](http://alijaya.github.io/alijaya-masonry/components/alijaya-masonry/)
 
+## Install
+
+```
+bower i alijaya-masonry -S
+```
+
 ## Example
 
 ``` html
