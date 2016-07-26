@@ -1,0 +1,142 @@
+<link rel="import" href="../../paper-slider/paper-slider.html">
+<link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../paper-styles/color.html">
+<link rel="import" href="../../paper-styles/shadow.html">
+<link rel="import" href="../../iron-image/iron-image.html">
+<link rel="import" href="../alijaya-masonry.html">
+
+<dom-module id="demo-gallery">
+  <template>
+    <style include="demo-pages-shared-styles"></style>
+    <style>
+      :host {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      alijaya-masonry {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        --alijaya-masonry-sizer: {
+          background: var(--paper-blue-grey-500);
+        };
+      }
+      alijaya-masonry-item {
+        transition: all 200ms ease;
+      }
+      iron-image {
+        width: 100%;
+        height: 100%;
+        --iron-image-placeholder: {
+          background: var(--paper-blue-grey-500);
+        };
+      }
+      #menu {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      #controls {
+        padding: 20px;
+      }
+    </style>
+    <alijaya-masonry  cols="[[cols]]" rows="[[rows]]"
+                      cell-width="[[cellWidth]]" cell-height="[[cellHeight]]"
+                      cell-ratio="[[cellRatio]]" gutter="[[gutter]]"
+                      style$="width:[[width]]%;">
+      <template is="dom-repeat" items="{{items}}">
+        <alijaya-masonry-item col="[[item.col]]" row="[[item.row]]">
+          <iron-image src="https://unsplash.it/[[_mult(item.col,200)]]/[[_mult(item.row,200)]]/?random=[[index]]" preload fade sizing="cover"></iron-image>
+        </alijaya-masonry-item>
+      </template>
+    </alijaya-masonry>
+    <paper-menu-button id="menu" horizontal-offset="56">
+      <paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
+      <div id="controls" class="dropdown-content">
+        <h4>count</h4>
+        <paper-slider editable immediate-value="{{count}}" value="[[count]]" min="0" max="100"></paper-slider>
+        <h4>width</h4>
+        <paper-slider editable immediate-value="{{width}}" value="[[width]]" min="50" max="100"></paper-slider>
+        <h4>cols</h4>
+        <paper-slider editable immediate-value="{{cols}}" value="[[cols]]" max="10"></paper-slider>
+        <h4>rows</h4>
+        <paper-slider editable immediate-value="{{rows}}" value="[[rows]]" max="10"></paper-slider>
+        <h4>cell-width</h4>
+        <paper-slider editable immediate-value="{{cellWidth}}" value="[[cellWidth]]" max="300"></paper-slider>
+        <h4>cell-height</h4>
+        <paper-slider editable immediate-value="{{cellHeight}}" value="[[cellHeight]]" max="300"></paper-slider>
+        <h4>cell-ratio</h4>
+        <paper-slider editable step="0.01" immediate-value="{{cellRatio}}" value="[[cellRatio]]" max="3"></paper-slider>
+        <h4>gutter</h4>
+        <paper-slider editable immediate-value="{{gutter}}" value="[[gutter]]" max="100"></paper-slider>
+      </div>
+    </paper-menu-button>
+  </template>
+  <script>
+    Polymer({
+      is: 'demo-gallery',
+      properties: {
+        width: {
+          type: Number,
+          value: 100,
+        },
+        cols: {
+          type: Number,
+          value: 8,
+        },
+        rows: {
+          type: Number,
+          value: null,
+        },
+        cellWidth: {
+          type: Number,
+          value: null,
+        },
+        cellHeight: {
+          type: Number,
+          value: null,
+        },
+        cellRatio: {
+          type: Number,
+          value: 1,
+        },
+        gutter: {
+          type: Number,
+          value: 0,
+        },
+        items: {
+          type: Array,
+          value: function() {
+            return [];
+          },
+          readOnly: true,
+          computed: '_createRandomItems(count)'
+        },
+        count: {
+          type: Number,
+          value: 20,
+        }
+      },
+      _mult: function(x, y) {
+        return x * y;
+      },
+      _random: function(min, max) {
+        return Math.floor(Math.random() * (max-min)) + min;
+      },
+      _createRandomItems(count) {
+        var arr = [];
+        for(var i=0; i<count; i++) {
+          var col = this._random(2,4);
+          var row = this._random(1,col+1);
+          arr.push({col:col, row:row});
+        }
+        return arr;
+      },
+    });
+  </script>
+</dom-module>

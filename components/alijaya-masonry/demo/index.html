@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+  <head>
+    <title>alijaya-masonry demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../paper-styles/color.html">
+    <link rel="import" href="../../paper-styles/shadow.html">
+
+    <link rel="import" href="demo-masonry.html">
+    <link rel="import" href="demo-gallery.html">
+    <link rel="import" href="../alijaya-masonry.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+      .centered {
+        max-width: 900px;
+      }
+      alijaya-masonry {
+        outline: var(--paper-blue-700) solid 5px;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      alijaya-masonry-item {
+        @apply(--shadow-elevation-2dp);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 200ms ease;
+      }
+      #demo {
+        --demo-snippet-demo: {
+          height: 500px;
+        };
+      }
+      demo-masonry {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="vertical-section-container centered">
+      <h3>Demo with Settings</h3>
+      <p>Click Menu Button to adjust the setting.</p>
+      <demo-snippet id="demo">
+        <template>
+          <demo-masonry items='[{"col":1, "row":2}, {"col":2, "row":1},
+                                {"col":1, "row":1}, {"col":2, "row":2},
+                                {"col":3, "row":2}, {"col":2, "row":2},
+                                {"col":1, "row":1}, {"col":2, "row":1},
+                                {"col":2, "row":1}, {"col":1, "row":2}]'></demo-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>Demo Gallery</h3>
+      <p>Click Menu Button to adjust the setting.</p>
+      <demo-snippet>
+        <template>
+          <demo-gallery></demo-gallery>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>cols, cell-width, and cell-height</h3>
+      <p>
+        Constants number of cols and item size.
+      </p>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cols="4" cell-width="100" cell-height="100" gutter="10">
+            <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+            <alijaya-masonry-item>2</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+            <alijaya-masonry-item row="3">7</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">9</alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>cell-width and cell-height</h3>
+      <p>
+        Derive <code>cols</code> from <code>alijaya-masonry</code> width
+        divided by <code>cell-width</code>.
+      </p>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cell-width="100" cell-height="100" gutter="10">
+            <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+            <alijaya-masonry-item>2</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+            <alijaya-masonry-item row="3">7</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">9</alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>cols and cell-height</h3>
+      <p>
+        Derive <code>cell-width</code> from <code>alijaya-masonry</code> width
+        divided by number of <code>cols</code>.
+      </p>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cols="4" cell-height="100" gutter="10">
+            <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+            <alijaya-masonry-item>2</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+            <alijaya-masonry-item row="3">7</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">9</alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>cell-width and cell-ratio</h3>
+      <p>
+        Derive <code>cell-height</code> from <code>cell-width</code> divided by
+        <code>cell-ratio</code>.
+      </p>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cell-width="100" cell-ratio="0.5" gutter="10">
+            <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+            <alijaya-masonry-item>2</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+            <alijaya-masonry-item row="3">7</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">9</alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>cell-height and cell-ratio</h3>
+      <p>
+        Derive <code>cell-width</code> from <code>cell-height</code> multiplied by
+        <code>cell-ratio</code>.
+      </p>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cell-height="100" cell-ratio="2" gutter="10">
+            <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+            <alijaya-masonry-item>2</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+            <alijaya-masonry-item row="3">7</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">9</alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>cols and cell-ratio</h3>
+      <p>
+        Derive <code>cell-width</code> from <code>alijaya-masonry</code> width
+        divided by number of <code>cols</code>.
+      </p>
+      <p>
+        Derive <code>cell-height</code> from <code>cell-width</code> divided by
+        <code>cell-ratio</code>.
+      </p>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cols="4" cell-ratio="1" gutter="10">
+            <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+            <alijaya-masonry-item>2</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+            <alijaya-masonry-item row="3">7</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">9</alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>cell-width, cell-height and cell-ratio</h3>
+      <p>
+        Ignore <code>cell-ratio</code>.
+      </p>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cell-width="100" cell-height="100" cell-ratio="2" gutter="10">
+            <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+            <alijaya-masonry-item>2</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+            <alijaya-masonry-item row="3">7</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">9</alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>cols, cell-height and cell-ratio</h3>
+      <p>
+        Derive <code>cell-width</code> from <code>cell-height</code> multiplied by
+        <code>cell-ratio</code>.
+      </p>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cols="4" cell-height="100" cell-ratio="0.5" gutter="10">
+            <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+            <alijaya-masonry-item>2</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+            <alijaya-masonry-item row="3">7</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">9</alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>cols and cell-width</h3>
+      <p>
+        Can't derive <code>cell-height</code>, so the item will take original
+        item height.
+      </p>
+      <p>
+        <code>row</code> in <code>alijaya-masonry-item</code> become useless.
+      </p>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cols="4" cell-width="100" gutter="10">
+            <alijaya-masonry-item col="2"><div style="height:123px;">1</div></alijaya-masonry-item>
+            <alijaya-masonry-item><div style="height:100px;">2</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2"><div style="height:54px;">3</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1"><div style="height:40px;">4</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2"><div style="height:30px;">5</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2"><div style="height:78px;">6</div></alijaya-masonry-item>
+            <alijaya-masonry-item row="3"><div style="height:54px;">7</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2"><div style="height:100px;">9</div></alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>cell-width only</h3>
+      <p>
+        Can't derive <code>cell-height</code>, so the item will take original
+        item height.
+      </p>
+      <p>
+        <code>row</code> in <code>alijaya-masonry-item</code> become useless.
+      </p>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cell-width="100" gutter="10">
+            <alijaya-masonry-item col="2"><div style="height:123px;">1</div></alijaya-masonry-item>
+            <alijaya-masonry-item><div style="height:100px;">2</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2"><div style="height:54px;">3</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1"><div style="height:40px;">4</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2"><div style="height:30px;">5</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2"><div style="height:78px;">6</div></alijaya-masonry-item>
+            <alijaya-masonry-item row="3"><div style="height:54px;">7</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2"><div style="height:100px;">9</div></alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>cols only</h3>
+      <p>
+        Can't derive <code>cell-height</code>, so the item will take original
+        item height.
+      </p>
+      <p>
+        <code>row</code> in <code>alijaya-masonry-item</code> become useless.
+      </p>
+      <demo-snippet>
+        <template>
+          <alijaya-masonry cols="4" gutter="10">
+            <alijaya-masonry-item col="2"><div style="height:123px;">1</div></alijaya-masonry-item>
+            <alijaya-masonry-item><div style="height:100px;">2</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2"><div style="height:54px;">3</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="1"><div style="height:40px;">4</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2"><div style="height:30px;">5</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="1" row="2"><div style="height:78px;">6</div></alijaya-masonry-item>
+            <alijaya-masonry-item row="3"><div style="height:54px;">7</div></alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+            <alijaya-masonry-item col="2" row="2"><div style="height:100px;">9</div></alijaya-masonry-item>
+          </alijaya-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+  </body>
+</html>

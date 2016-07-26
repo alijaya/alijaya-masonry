@@ -1,0 +1,54 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`alijaya-masonry-item`
+masonry item
+
+@demo demo/index.html
+-->
+
+<dom-module id="alijaya-masonry-item">
+  <template strip-whitespace>
+    <style>
+      :host {
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+      }
+    </style>
+    <content></content>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'alijaya-masonry-item',
+
+      /**
+       * Fired when either col or row is changed.
+       * It's used for relayouting.
+       *
+       * @event alijaya-masonry-item-change
+       */
+
+      properties: {
+        col: {
+          type: Number,
+          value: 1,
+        },
+        row: {
+          type: Number,
+          value: 1,
+        },
+      },
+
+      observers: [
+        '_propChange(col, row)'
+      ],
+
+      _propChange: function() {
+        this.fire('alijaya-masonry-item-change');
+      },
+    });
+  </script>
+</dom-module>

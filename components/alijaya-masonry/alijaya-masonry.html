@@ -1,0 +1,259 @@
+<link rel="import" href="../polymer/polymer.html">
+<script src="../css-element-queries/src/ResizeSensor.js"></script>
+<link rel="import" href="alijaya-masonry-item.html">
+
+<!--
+## alijaya-masonry
+
+masonry layout in polymer, inspired by desandro/masonry
+
+[*Github Repo*](https://github.com/alijaya/alijaya-masonry)
+
+See demo for example.
+
+## Example
+
+``` html
+<alijaya-masonry cols="4" cell-ratio="1" gutter="10">
+  <alijaya-masonry-item col="2">1</alijaya-masonry-item>
+  <alijaya-masonry-item>2</alijaya-masonry-item>
+  <alijaya-masonry-item col="2" row="2">3</alijaya-masonry-item>
+  <alijaya-masonry-item col="2" row="1">4</alijaya-masonry-item>
+  <alijaya-masonry-item col="1" row="2">5</alijaya-masonry-item>
+  <alijaya-masonry-item col="1" row="2">6</alijaya-masonry-item>
+  <alijaya-masonry-item row="3">7</alijaya-masonry-item>
+  <alijaya-masonry-item col="2" row="2">8</alijaya-masonry-item>
+  <alijaya-masonry-item col="2" row="2">9</alijaya-masonry-item>
+</alijaya-masonry>
+```
+
+## Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--alijaya-masonry-sizer` | Mixin applied to inner bounding-box | `{}`
+
+@demo demo/index.html
+-->
+
+<dom-module id="alijaya-masonry">
+  <template strip-whitespace>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+      }
+
+      #sizer {
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        @apply(--alijaya-masonry-sizer);
+      }
+
+      #sensor {
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        visibility: hidden;
+        overflow: hidden;
+        z-index: -1;
+      }
+    </style>
+    <div id="sensor"></div>
+    <div id="sizer">
+      <content id="content" select="alijaya-masonry-item"></content>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'alijaya-masonry',
+
+      properties: {
+        /**
+         * Number of columns.
+         * Can be derived from `cellWidth`
+         */
+        cols: {
+          type: Number,
+          value: null,
+        },
+        /**
+         * Number of rows.
+         * Used for determine the fixed height of component.
+         */
+        rows: {
+          type: Number,
+          value: null,
+        },
+        /**
+         * The individual cell width.
+         * Can be derived from `cellHeight` and `cellRatio`.
+         * Or can be derived from `cols`.
+         */
+        cellWidth: {
+          type: Number,
+          value: null,
+        },
+        /**
+         * The individual cell height.
+         * Can be derived from `cellWidth` and `cellRatio`.
+         * If can't be derived, the cell height takes flexible form.
+         */
+        cellHeight: {
+          type: Number,
+          value: null,
+        },
+        /**
+         * The individual cell ratio.
+         * Used for determine the `cellWidth` or `cellHeight`.
+         * If `cellWidth` and `cellHeight` are set, this will be ignored.
+         */
+        cellRatio: {
+          type: Number,
+          value: null,
+        },
+        /**
+         * The spacing between items.
+         */
+        gutter: {
+          type: Number,
+          value: 0,
+        },
+      },
+
+      observers: [
+        '_propChange(cols, rows, cellWidth, cellHeight, cellRatio, gutter)'
+      ],
+
+      listeners: {
+        'alijaya-masonry-item-change': '_childChange',
+      },
+
+      attached: function() {
+        this._nodeObserver = Polymer.dom(this).observeNodes(function(info) {
+          this.layout();
+        }.bind(this));
+        this._resizeSensor = new ResizeSensor(this.$.sensor, function(el) {
+          this.layout();
+        }.bind(this));
+      },
+
+      detached: function() {
+        Polymer.dom(this).unobserveNodes(this._nodeObserver);
+        delete this._nodeObserver;
+        this._resizeSensor.detach();
+        delete this._resizeSensor;
+      },
+
+      _layout: function(items, cols, rows, cellWidth, cellHeight, gutter) {
+        var groupCol = [];
+        for(var i=0; i<cols; i++) groupCol.push(0);
+        items.forEach(function(el, idx) {
+          var x = 0;
+          var y = Infinity;
+          var col = el.col;
+          var row = el.row;
+          if(!col || !row) return;
+          if(col > cols) col = cols; // truncate the col
+          if(!cellHeight) el.style.height = null;
+
+          for(var i=0; i<cols-col+1; i++) {
+            var curY = Math.max.apply(null, groupCol.slice(i, i+col));
+            if(curY < y) {
+              x = i;
+              y = curY;
+            }
+          }
+          for(var i=x; i<x+col; i++) {
+            if(cellHeight) {
+              groupCol[i] = y + row;
+            } else {
+              groupCol[i] = y + el.offsetHeight + gutter;
+            }
+          }
+
+          el.style.left = Math.round((cellWidth + gutter) * x) + 'px';
+          el.style.width = Math.round((cellWidth + gutter) * col - gutter) + 'px';
+          if(cellHeight) {
+            el.style.top = Math.round((cellHeight + gutter) * y) + 'px';
+            el.style.height = Math.round((cellHeight + gutter) * row - gutter) + 'px';
+          } else {
+            el.style.top = Math.round(y) + 'px';
+            el.style.height = null;
+          }
+        });
+
+        this.$.sizer.style.width = Math.round((cellWidth + gutter) * cols - gutter) + 'px';
+        if(cellHeight) {
+          rows = rows ? rows : Math.max.apply(null, groupCol);
+          this.$.sizer.style.height = Math.round((cellHeight + gutter) * rows - gutter) + 'px';
+        } else {
+          this.$.sizer.style.height = Math.round(Math.max.apply(null, groupCol) - gutter) + 'px';
+        }
+      },
+
+      _propChange: function() {
+        this.layout();
+      },
+
+      _childChange: function() {
+        this.layout();
+      },
+
+      /**
+       * Run the layout algorithm if something change.
+       *
+       * @method layout
+       */
+      layout: function() {
+        var width = this.clientWidth;
+        var height = this.clientHeight;
+        var cols = this.cols;
+        var rows = this.rows;
+        var cellWidth = this.cellWidth;
+        var cellHeight = this.cellHeight;
+        var cellRatio = this.cellRatio;
+        var gutter = this.gutter;
+
+        if(!cellWidth && cellHeight && cellRatio) { // derive cellWidth
+          cellWidth = cellHeight * cellRatio;
+        }
+
+        if(cols) {
+          if(cellWidth) {
+            // good to go
+          } else {
+            cellWidth = (width + gutter) / cols - gutter;
+          }
+        } else {
+          if(cellWidth) {
+            cols = Math.max(1, Math.floor((width + gutter) / (cellWidth + gutter)));
+          } else {
+            // bad to go
+            return;
+          }
+        }
+
+        if(!cellHeight && cellWidth && cellRatio) { // derive cellHeight
+          cellHeight = cellWidth / cellRatio;
+        }
+
+        this._layout( this.getEffectiveChildren(),
+                      cols, rows,
+                      cellWidth, cellHeight,
+                      gutter);
+      },
+
+    });
+  </script>
+</dom-module>
