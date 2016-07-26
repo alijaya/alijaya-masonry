@@ -32,6 +32,7 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
     "paper-slider": "^1.0.11",
     "paper-menu-button": "^1.5.0",
-    "paper-icon-button": "^1.1.2"
+    "paper-icon-button": "^1.1.2",
+    "iron-image": "^1.2.3"
   }
 }

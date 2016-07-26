@@ -12,6 +12,7 @@
     <link rel="import" href="../../paper-styles/shadow.html">
 
     <link rel="import" href="demo-masonry.html">
+    <link rel="import" href="demo-gallery.html">
     <link rel="import" href="../alijaya-masonry.html">
 
     <style is="custom-style" include="demo-pages-shared-styles">
@@ -51,12 +52,21 @@
       <p>Click Menu Button to adjust the setting.</p>
       <demo-snippet id="demo">
         <template>
-          <demo-masonry cell-width="100" cell-height="100" gutter="10"
-                        items='[{"col":1, "row":2}, {"col":2, "row":1},
+          <demo-masonry items='[{"col":1, "row":2}, {"col":2, "row":1},
                                 {"col":1, "row":1}, {"col":2, "row":2},
                                 {"col":3, "row":2}, {"col":2, "row":2},
                                 {"col":1, "row":1}, {"col":2, "row":1},
                                 {"col":2, "row":1}, {"col":1, "row":2}]'></demo-masonry>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>Demo Gallery</h3>
+      <p>Click Menu Button to adjust the setting.</p>
+      <demo-snippet>
+        <template>
+          <demo-gallery></demo-gallery>
         </template>
       </demo-snippet>
     </div>
